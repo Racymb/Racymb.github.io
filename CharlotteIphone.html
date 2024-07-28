@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Message for You</title>
+    <style>
+        /* CSS intégré */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: whitesmoke;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            position: relative;
+            overflow: hidden; /* Ajouté pour éviter le défilement lors du déplacement du bouton */
+        }
+
+        .wrapper {
+            text-align: center;
+            padding: 20px;
+            max-width: 90%;
+        }
+
+        .gif {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #e94d58;
+            margin: 15px 0;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        button {
+            width: 150px;
+            height: 50px;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 30px;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px gray;
+            border: 2px solid #e94d58;
+            margin: 0 10px;
+        }
+
+        .yes-btn {
+            background: #e94d58;
+        }
+
+        .no-btn {
+            background: white;
+            color: #e94d58;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h2 class="question">Veux-tu prendre un verre avec moi?</h2>
+        <img class="gif" alt="gif" src="https://media.giphy.com/media/TujSrrPYXqeAdPnvuh/giphy-downsized-large.gif"/>
+        <div class="btn-group">
+            <button class="yes-btn">Oui</button>
+            <button class="no-btn">Non</button>
+        </div>
+    </div> 
+<script>
+    // JavaScript intégré
+    const wrapper = document.querySelector(".wrapper");
+    const question = document.querySelector(".question");
+    const gif = document.querySelector(".gif");
+    const yesBtn = document.querySelector(".yes-btn");
+    const noBtn = document.querySelector(".no-btn");
+    const btnGroup = document.querySelector(".btn-group");
+
+    yesBtn.addEventListener("click", () => {
+        question.innerHTML = "Okey! rdv le 3 août";
+        gif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHpjb3IxZnlvc3dzbHNmOW5jejVhZTJzdzczN2t5Z3RpZGhwc3drayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8ciLGd6O0d9YXjE5zR/giphy.gif";
+        btnGroup.style.display = 'none';  // Cache les boutons
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+        const noBtnRect = noBtn.getBoundingClientRect();
+        const maxX = window.innerWidth - noBtnRect.width;
+        const maxY = window.innerHeight - noBtnRect.height;
+
+        let randomX = Math.floor(Math.random() * maxX);
+        let randomY = Math.floor(Math.random() * maxY);
+
+        // Pour s'assurer que le bouton reste visible
+        if (randomX < 0) randomX = 0;
+        if (randomY < 0) randomY = 0;
+
+        noBtn.style.position = "absolute";
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+    });
+
+    noBtn.addEventListener("click", () => {
+        question.innerHTML = "Dommage, peut-être une autre fois!";
+        gif.src = "https://media.giphy.com/media/1BXa2alBjrCXC/giphy.gif";  // Exemple d'un autre GIF
+        btnGroup.style.display = 'none';  // Cache les boutons
+    });
+</script>
+</body>
+</html>
